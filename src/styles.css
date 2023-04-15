@@ -1,0 +1,40 @@
+.container {
+  max-width: 720px;
+}
+
+.btn {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.btn:focus {
+  outline: none !important;
+}
+
+input:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+textarea:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.selected {
+  background-color: #0000E7 !important;
+}
+
+.signUp,
+.login {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.logoutContainer {
+  text-align: right;
+}
+
+.signUp-error {
+  color: red;
+}
