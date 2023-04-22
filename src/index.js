@@ -3,6 +3,8 @@
 import * as dotenv from 'dotenv';
 dotenv.config();
 
+import formatDistanceToNow from 'date-fns/formatDistanceToNow';
+
 import { initializeApp } from 'firebase/app';
 import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { getFirestore, collection, getDocs, onSnapshot, addDoc, Timestamp, query, where, orderBy, limit } from 'firebase/firestore';
@@ -239,7 +241,7 @@ class RenderUI {
 
     // render data on UI
     render(data) {
-        const when = dateFns.distanceInWordsToNow(
+        const when = formatDistanceToNow(
             data.created_at.toDate(),
             { addSuffix: true }
         );
