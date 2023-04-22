@@ -1,5 +1,8 @@
 'use strict';
 
+import * as dotenv from 'dotenv';
+dotenv.config();
+
 import { initializeApp } from 'firebase/app';
 import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { getFirestore, collection, getDocs, onSnapshot, addDoc, Timestamp, query, where, orderBy, limit } from 'firebase/firestore';
@@ -13,13 +16,13 @@ import { getFirestore, collection, getDocs, onSnapshot, addDoc, Timestamp, query
 
 
 const firebaseConfig = {
-    apiKey: "API_KEY",
-    authDomain: "opinions-23699.firebaseapp.com",
-    projectId: "opinions-23699",
-    storageBucket: "opinions-23699.appspot.com",
-    messagingSenderId: "605296572878",
-    appId: "1:605296572878:web:81bc054d0e6e6c8e08539f",
-    measurementId: "G-1ZVY48QF2Y"
+    apiKey: process.env.API_KEY,
+    authDomain: process.env.AUTH_DOMAIN,
+    projectId: process.env.PROJECT_ID,
+    storageBucket: process.env.STORAGE_BUCKET,
+    messagingSenderId: process.env.MESSAGING_ID,
+    appId: process.env.APP_ID,
+    measurementId: process.env.MESURMENT_ID
 };
 
 // Initialize Firebase
@@ -58,6 +61,13 @@ const loginCredentials = async (e) => {
 };
 
 loginForm.addEventListener('submit', loginCredentials);
+
+// redirect to login if user already have an account
+const loginLink = document.querySelector('.loginLink');
+loginLink.addEventListener('click', () => {
+    signUpForm.classList.add('d-none');
+    loginForm.classList.remove('d-none');
+});
 
 
 // sign up new user
@@ -237,11 +247,13 @@ class RenderUI {
         <li class="list-group-item">
           <span class="subject"><strong>${data.subject}</strong></span>
           <div class="message">${data.message}</div>
-          <div class="time text-muted">
-            <i>${when}</i>
+          <div class="time">
+          <p class="text-muted text-end mb-0">
+          <i>${when}</i>
             <span class="username">
               <small>by <b>${data.username}</b></small>
             </span>
+          </p>
           </div>
         </li>
         `;
